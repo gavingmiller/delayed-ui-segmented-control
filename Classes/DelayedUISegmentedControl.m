@@ -2,7 +2,7 @@
 //  DelayedUISegmentedControl.m
 //
 //  Created by Gavin Miller on 10-02-18.
-//  Copyright 2010 RT Labs & Gavin Miller. All rights reserved.
+//  Copyright 2011 RANDOMTYPE. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal

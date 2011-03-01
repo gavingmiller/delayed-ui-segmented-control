@@ -1,8 +1,9 @@
 //
-//  DelayedUISegmentedControl.h
+//  RootViewController.h
+//  delayed-ui-segmented-controler
 //
-//  Created by Gavin Miller on 10-02-18.
-//  Copyright 2010 RT Labs & Gavin Miller. All rights reserved.
+//  Created by Gavin Miller on 11-03-01.
+//  Copyright 2011 RANDOMTYPE. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,29 +23,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface DelayedUISegmentedControl : UISegmentedControl {
-	
-#pragma mark Retain
-	NSTimer *timer;
-	
-#pragma mark Assign
-	id target;
-	SEL action;	
+@interface RootViewController : UITableViewController {
 }
 
-#pragma mark Retain
-@property (nonatomic, retain) NSTimer *timer;
-
-#pragma mark Assign
-@property (nonatomic, assign) id target;
-@property (nonatomic, assign) SEL action;
-
-#pragma mark Instance Methods
-- (void)addTarget:(id)targetValue action:(SEL)actionValue forControlEvents:(UIControlEvents)events;
-- (void)segmentAction:(UISegmentedControl *)sender;
-- (void)delaySegmentAction;
-
 @end
-
