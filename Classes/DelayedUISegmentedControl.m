@@ -27,29 +27,15 @@
 #define TIME_INTERVAL 0.25
 
 @implementation DelayedUISegmentedControl
-#pragma mark Retain
-@synthesize timer;
 
-#pragma mark Assign
+@synthesize timer;
 @synthesize target, action;
 
-#pragma mark - 
-#pragma mark Setup & TearDown
-- (void)dealloc {
-	[timer release];
-	
-	[super dealloc];
-}
-
-#pragma mark -
-#pragma mark Overridden Methods
 
 - (void)segmentAction:(UISegmentedControl *)sender {
 	self.timer = [NSTimer scheduledTimerWithTimeInterval:TIME_INTERVAL target:self selector:@selector(delaySegmentAction) userInfo:nil repeats:NO];
 }
 
-#pragma mark -
-#pragma mark Instance Methods
 - (void)addTarget:(id)targetValue action:(SEL)actionValue forControlEvents:(UIControlEvents)events {
 	self.target = targetValue;
 	self.action = actionValue;
@@ -57,11 +43,14 @@
 	[super addTarget:self action:@selector(segmentAction:) forControlEvents:events];
 }
 
-#pragma mark -
-#pragma mark Selectors
-
 - (void)delaySegmentAction {
 	[self sendAction:self.action to:self.target forEvent:nil];
+}
+
+- (void)dealloc {
+	[timer release];
+	
+	[super dealloc];
 }
 
 @end

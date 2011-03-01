@@ -25,23 +25,15 @@
 #import <Foundation/Foundation.h>
 
 @interface DelayedUISegmentedControl : UISegmentedControl {
-	
-#pragma mark Retain
 	NSTimer *timer;
-	
-#pragma mark Assign
 	id target;
 	SEL action;	
 }
 
-#pragma mark Retain
 @property (nonatomic, retain) NSTimer *timer;
-
-#pragma mark Assign
 @property (nonatomic, assign) id target;
 @property (nonatomic, assign) SEL action;
 
-#pragma mark Instance Methods
 - (void)addTarget:(id)targetValue action:(SEL)actionValue forControlEvents:(UIControlEvents)events;
 - (void)segmentAction:(UISegmentedControl *)sender;
 - (void)delaySegmentAction;

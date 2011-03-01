@@ -26,6 +26,10 @@
 #import <UIKit/UIKit.h>
 
 @interface RootViewController : UITableViewController {
+	// A reference to the segmented control is required to retrieve it's selected value
+	UISegmentedControl *segmentedControl;
 }
+
+-(void) segmentAction;
 
 @end
