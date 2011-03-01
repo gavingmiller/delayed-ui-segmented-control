@@ -1,15 +1,24 @@
 Delayed UI Segmented Control
 =============
 
-The Delayed UI Segmented Control is a subclassed UISegmentedControl
+The Delayed UI Segmented Control is a subclassed UISegmentedControl. It is used
+to provide better feedback to the user when the segmented control is touched.
+Namely in the case where the segmented control is used in a manner that hides
+the control after the touch occurs. The control provides a slight delay before
+performing its action so that the user has time to see the touch occur.
 
-![Delayed UI Segmented Control](http://www.yycapps.com/wp-content/uploads/2011/01/2x2-grid-view.png)
+![Delayed UI Segmented Control](http://www.thepursuitofquality.com/img/delayed_segment_control.png)
 
 You can read about the details on [calgary's awesome iPhone dev site - yycApps.com][3]
 
 History
 -------
 
+The Delayed UI Segmented Control originated as a need in [myDomains][2]. On one
+of the screens there was an option to add a domain name to one of two lists:
+myDomains or myWatches. What was observed was that when clicking the button to
+add to the list, the user was too quickly taken to a new view without seeing
+the touch take place. Thusly the dealyed control was created.
 
 License
 -------
@@ -47,4 +56,4 @@ SHOULDN'T HAPPEN.
 
 [1]: http://creativecommons.org/licenses/by/2.5/ca/
 [2]: http://rtlabs.ca/mydomains/
-[3]: 
+[3]: http://www.yycapps.com/
