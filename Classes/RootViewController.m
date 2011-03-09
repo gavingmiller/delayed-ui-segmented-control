@@ -39,36 +39,64 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		
-		// The DelayedUISegmentedControl follows all normal initialization patterns of UISegmentedControl
-		segmentedControl = [[[DelayedUISegmentedControl alloc] 
-							 initWithItems:[NSArray arrayWithObjects: @"First", @"Second", nil]] autorelease];
-		
-		// Adds a delay to the selector of TIME_INTERVAL amount; default is 0.25
-		[segmentedControl addTarget:self action:@selector(segmentAction)
-				   forControlEvents:UIControlEventValueChanged];
-		
-		// Add to cell
-		[cell addSubview:segmentedControl];
-    }
+    static NSString *DelayedCellIdentifier = @"DelayedCell";
+	static NSString *RegularCellIdentifier = @"RegularCell";
+	
+    UITableViewCell *cell;
+	
+	if (indexPath.row == 0) {
+		cell = [tableView dequeueReusableCellWithIdentifier:DelayedCellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DelayedCellIdentifier] autorelease];
+			
+			// The DelayedUISegmentedControl follows all normal initialization patterns of UISegmentedControl
+			UISegmentedControl *delayed = [[[DelayedUISegmentedControl alloc] 
+											initWithItems:[NSArray arrayWithObjects: @"First", @"Second", nil]] autorelease];
+			
+			// Method call looks like a regular call, but comes with a TIME_INTERVAL delay; default is 0.25
+			[delayed addTarget:self 
+						action:@selector(segmentAction:)
+			  forControlEvents:UIControlEventValueChanged];
+			
+			// Add to cell
+			[cell addSubview:delayed];
+		}
+	}
+	
+	if (indexPath.row == 1) {
+		cell = [tableView dequeueReusableCellWithIdentifier:RegularCellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RegularCellIdentifier] autorelease];
+			
+			// The DelayedUISegmentedControl follows all normal initialization patterns of UISegmentedControl
+			UISegmentedControl *regular = [[[UISegmentedControl alloc] 
+											initWithItems:[NSArray arrayWithObjects: @"First", @"Second", nil]] autorelease];
+			
+			// Same method call as DelayedUISegmentedControl
+			[regular addTarget:self 
+						action:@selector(segmentAction:) 
+			  forControlEvents:UIControlEventValueChanged];
+			
+			// Add to cell
+			[cell addSubview:regular];
+		}		
+	}
 
     return cell;
 }
 
--(void) segmentAction {
-	int index = [segmentedControl selectedSegmentIndex];
-	NSLog(@"segment action: %d", index);
+-(void) segmentAction:(UISegmentedControl *) sender {
+	int index = [sender selectedSegmentIndex];
+	if ([sender isMemberOfClass:[DelayedUISegmentedControl class]]) {
+		NSLog(@"delayed segment action: %d", index);
+	} else {
+		NSLog(@"regular segment action: %d", index);
+	}
 }
 
 #pragma mark -
