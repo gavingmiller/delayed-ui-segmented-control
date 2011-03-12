@@ -9,8 +9,6 @@ performing its action so that the user has time to see the touch occur.
 
 ![Delayed UI Segmented Control](http://www.thepursuitofquality.com/img/delayed_segment_control.png)
 
-<iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/KsHMTUiyQHs?rel=0" frameborder="0" allowfullscreen></iframe>
-
 You can read about the details on [calgary's awesome iPhone dev site - yycApps.com][3]
 or at [my blog][4] where this code was originally posted.
 
