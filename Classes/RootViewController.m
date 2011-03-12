@@ -42,6 +42,10 @@
     return 2;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 60;
+}
+
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *DelayedCellIdentifier = @"DelayedCell";
@@ -53,50 +57,76 @@
 		cell = [tableView dequeueReusableCellWithIdentifier:DelayedCellIdentifier];
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DelayedCellIdentifier] autorelease];
-			
-			// The DelayedUISegmentedControl follows all normal initialization patterns of UISegmentedControl
-			UISegmentedControl *delayed = [[[DelayedUISegmentedControl alloc] 
-											initWithItems:[NSArray arrayWithObjects: @"First", @"Second", nil]] autorelease];
-			
-			// Method call looks like a regular call, but comes with a TIME_INTERVAL delay; default is 0.25
-			[delayed addTarget:self 
-						action:@selector(segmentAction:)
-			  forControlEvents:UIControlEventValueChanged];
-			
-			// Add to cell
-			[cell addSubview:delayed];
 		}
+		
+		// The DelayedUISegmentedControl follows all normal initialization patterns of UISegmentedControl
+		UISegmentedControl *delayed = [[[DelayedUISegmentedControl alloc] 
+										initWithItems:[NSArray arrayWithObjects: @"First", @"Second", nil]] autorelease];
+		
+		// Method call looks like a regular call, but comes with a TIME_INTERVAL delay; default is 0.25
+		[delayed addTarget:self 
+					action:@selector(segmentAction:)
+		  forControlEvents:UIControlEventValueChanged];
+		
+		[delayed setFrame:CGRectMake(125.0f, 10.0f, 165.0f, 40.0f)];
+		
+		// Create Label
+		UILabel *label = [[[UILabel alloc] init] autorelease];
+		label.text = @"Delayed";
+		[label setFrame:CGRectMake(15.0f, 10.0f, 70.0f, 40.0f)];
+		
+		// Add to cell
+		[cell.contentView addSubview:delayed];
+		[cell.contentView addSubview:label];
 	}
 	
 	if (indexPath.row == 1) {
 		cell = [tableView dequeueReusableCellWithIdentifier:RegularCellIdentifier];
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RegularCellIdentifier] autorelease];
-			
-			// The DelayedUISegmentedControl follows all normal initialization patterns of UISegmentedControl
-			UISegmentedControl *regular = [[[UISegmentedControl alloc] 
-											initWithItems:[NSArray arrayWithObjects: @"First", @"Second", nil]] autorelease];
-			
-			// Same method call as DelayedUISegmentedControl
-			[regular addTarget:self 
-						action:@selector(segmentAction:) 
-			  forControlEvents:UIControlEventValueChanged];
-			
-			// Add to cell
-			[cell addSubview:regular];
-		}		
+		}
+		
+		// The DelayedUISegmentedControl follows all normal initialization patterns of UISegmentedControl
+		UISegmentedControl *regular = [[[UISegmentedControl alloc] 
+										initWithItems:[NSArray arrayWithObjects: @"First", @"Second", nil]] autorelease];
+		
+		// Same method call as DelayedUISegmentedControl
+		[regular addTarget:self 
+					action:@selector(segmentAction:) 
+		  forControlEvents:UIControlEventValueChanged];
+		
+		[regular setFrame:CGRectMake(125.0f, 10.0f, 165.0f, 40.0f)];
+		
+		// Create Label
+		UILabel *label = [[[UILabel alloc] init] autorelease];
+		label.text = @"Regular";
+		[label setFrame:CGRectMake(15.0f, 10.0f, 70.0f, 40.0f)];
+		
+		// Add to cell
+		[cell.contentView addSubview:regular];
+		[cell.contentView addSubview:label];
 	}
 
     return cell;
 }
 
 -(void) segmentAction:(UISegmentedControl *) sender {
+	UIAlertView *alertView;
 	int index = [sender selectedSegmentIndex];
+	if (index == -1) {
+		return;
+	}
+	
 	if ([sender isMemberOfClass:[DelayedUISegmentedControl class]]) {
 		NSLog(@"delayed segment action: %d", index);
+		alertView = [[UIAlertView alloc] initWithTitle:@"Delayed Segment" message:@"This segment has been delayed. Notice the brief highlighting." delegate:nil cancelButtonTitle:@"Hide" otherButtonTitles:nil];
 	} else {
 		NSLog(@"regular segment action: %d", index);
+		alertView = [[UIAlertView alloc] initWithTitle:@"Regular Segment" message:@"This segment was not delayed. No highlighting of touched segment." delegate:nil cancelButtonTitle:@"Hide" otherButtonTitles:nil];
 	}
+	
+	[alertView show];
+	sender.selectedSegmentIndex = -1;
 }
 
 #pragma mark -

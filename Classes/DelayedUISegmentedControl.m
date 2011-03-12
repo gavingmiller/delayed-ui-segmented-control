@@ -1,5 +1,6 @@
 //
 //  DelayedUISegmentedControl.m
+//  delayed-ui-segmented-controler
 //
 //  Created by Gavin Miller on 10-02-18.
 //  Copyright 2011 RANDOMTYPE. All rights reserved.
