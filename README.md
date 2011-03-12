@@ -9,7 +9,10 @@ performing its action so that the user has time to see the touch occur.
 
 ![Delayed UI Segmented Control](http://www.thepursuitofquality.com/img/delayed_segment_control.png)
 
+<iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/KsHMTUiyQHs?rel=0" frameborder="0" allowfullscreen></iframe>
+
 You can read about the details on [calgary's awesome iPhone dev site - yycApps.com][3]
+or at [my blog][4] where this code was originally posted.
 
 History
 -------
@@ -56,4 +59,5 @@ SHOULDN'T HAPPEN.
 
 [1]: http://creativecommons.org/licenses/by/2.5/ca/
 [2]: http://rtlabs.ca/mydomains/
-[3]: http://www.yycapps.com/
+[3]: http://www.yycapps.com/2011/03/making-the-iphone-responsive-to-a-users-touch
+[4]: http://www.thepursuitofquality.com/post/35/providing-better-visual-feedback-for-the-uisegmentedcontrol.html
